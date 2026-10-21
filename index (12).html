@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AmioVox Collections — Checkout</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #0f172a;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: #e2e8f0;
+    }
+    .card {
+      background: #1e293b;
+      width: 100%;
+      max-width: 440px;
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+      border: 1px solid #334155;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+    .brand .dot {
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    }
+    .brand h1 { font-size: 18px; font-weight: 700; color: #fff; }
+    .subtitle { color: #94a3b8; font-size: 13px; margin-bottom: 24px; }
+    .amount {
+      background: #0f172a;
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .amount .label { color: #94a3b8; font-size: 14px; }
+    .amount .value { font-size: 24px; font-weight: 700; color: #fff; }
+    label { display: block; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; margin-top: 16px; }
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid #334155;
+      background: #0f172a;
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+    }
+    input:focus { border-color: #6366f1; }
+    .row { display: flex; gap: 12px; }
+    .row > div { flex: 1; }
+    button {
+      width: 100%;
+      margin-top: 24px;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    button:hover { opacity: 0.9; }
+    .note {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 12px;
+      color: #64748b;
+    }
+    /* success view */
+    .success { text-align: center; }
+    .check {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #10b981, #059669);
+      margin: 0 auto 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .check svg { width: 38px; height: 38px; }
+    .success h1 { font-size: 24px; color: #fff; margin-bottom: 10px; }
+    .success p { color: #94a3b8; font-size: 15px; line-height: 1.5; }
+    .success .amount-big {
+      margin: 24px 0;
+      font-size: 32px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .link-btn {
+      display: inline-block;
+      margin-top: 24px;
+      padding: 12px 28px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      font-size: 15px;
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <!-- Checkout view -->
+  <form id="checkout" class="card">
+    <div class="brand">
+      <div class="dot"></div>
+      <h1>AmioVox Collections</h1>
+    </div>
+    <p class="subtitle">Secure Checkout</p>
+
+    <div class="amount">
+      <span class="label">Total due</span>
+      <span class="value">$49.99</span>
+    </div>
+
+    <label for="name">Name on card</label>
+    <input id="name" name="name" type="text" placeholder="Jane Doe" required />
+
+    <label for="card">Card number</label>
+    <input id="card" name="card" type="text" placeholder="1234 5678 9012 3456" required />
+
+    <div class="row">
+      <div>
+        <label for="expiry">Expiry</label>
+        <input id="expiry" name="expiry" type="text" placeholder="MM/YY" required />
+      </div>
+      <div>
+        <label for="cvc">CVC</label>
+        <input id="cvc" name="cvc" type="text" placeholder="123" required />
+      </div>
+    </div>
+
+    <button type="submit">Pay $49.99</button>
+    <p class="note">This is a demo page. No real payment is processed.</p>
+  </form>
+
+  <!-- Success view -->
+  <div id="success" class="card success hidden">
+    <div class="check">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    </div>
+    <h1>Thanks for your payment!</h1>
+    <p id="success-msg">Your payment to <strong>AmioVox Collections</strong> was received successfully.</p>
+    <div class="amount-big">$49.99</div>
+    <p>A confirmation has been sent to your email.</p>
+    <button type="button" class="link-btn" onclick="goBack()">Back to checkout</button>
+  </div>
+
+  <script>
+    var checkout = document.getElementById('checkout');
+    var success = document.getElementById('success');
+    var msg = document.getElementById('success-msg');
+
+    checkout.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = document.getElementById('name').value.trim() || 'Customer';
+      msg.innerHTML = 'Hi ' + escapeHtml(name) +
+        ', your payment to <strong>AmioVox Collections</strong> was received successfully.';
+      checkout.classList.add('hidden');
+      success.classList.remove('hidden');
+      window.scrollTo(0, 0);
+    });
+
+    function goBack() {
+      success.classList.add('hidden');
+      checkout.classList.remove('hidden');
+      checkout.reset();
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+  </script>
+</body>
+</html>
